@@ -9,6 +9,9 @@ public class Aspirateur {
 	private directionEnum direction; //N, NE, E, SE, S, SW, W, NW
 	private int numDirection; //N(0), NE(1), E(2), SE(3), S(4), SW(5), W(6), NW(7);
 	
+	final private int NBDIR = 8; //nbre de direction 
+
+	
 	public Aspirateur() {
 		super();
 	}
@@ -55,8 +58,8 @@ public class Aspirateur {
 	}
 	
 	public void initDirectionWithNumDirection(int arg) {
-		while (arg<0) arg+=8;
-		this.numDirection = arg % 8;
+		while (arg<0) arg+=NBDIR;
+		this.numDirection = arg % NBDIR;
 		this.direction = directionEnum.values()[(numDirection)];
 		
 	}
