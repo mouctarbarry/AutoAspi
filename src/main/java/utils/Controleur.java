@@ -81,94 +81,12 @@ public class Controleur {
 		return ordres;
 	}
 	
-//	public static void isValid (Grille grille, Aspirateur aspi) { //methode pour vérifier que l'aspirateur ne sort pas de la grille
-//		if(aspi.getY() > grille.getY() || aspi.getX() > grille.getX()) {
-//			System.err.println("Deplacement hors cadre !");
-//		}
-//	}
-//	
+
 	public Aspirateur deplacement (Grille grille, Aspirateur aspi, List<ordreEnum> ordres) {
 		for (ordreEnum i : ordres) {
 			switch (i) {
 			case A:
-				
-				switch (aspi.getNumDirection()) {
-				case 0: //Nord
-					if (aspi.getY() < grille.getY()) { //vérification du cadre
-						aspi.setY(aspi.getY()+1);
-						break;
-					}else {
-						System.err.println("Attention: Sortie du cadre !");
-						return aspi;
-					}
-					
-				case 1: //Nord-Est
-					if (aspi.getX() < grille.getX() && aspi.getY() <grille.getY()) {
-						aspi.setX(aspi.getX()+1);
-						aspi.setY(aspi.getY()+1);
-						break;
-					}else {
-						System.err.println("Attention: Sortie du cadre !");
-						return aspi;
-					}
-					
-				case 2: //Est
-					if (aspi.getX() < grille.getX()) {
-						aspi.setX(aspi.getX()+1);
-						break;
-					}else {
-						System.err.println("Attention: Sortie du cadre !");
-						return aspi;
-					}
-					
-				case 3: //Sud-Est
-					if (aspi.getX() < grille.getX() && aspi.getY() > 0) {
-						aspi.setX(aspi.getX()+1);
-						aspi.setY(aspi.getY()-1);
-						break;
-					}else {
-						System.err.println("Attention: Sortie du cadre !");
-						return aspi;
-					}
-					
-				case 4: //Sud
-					if (aspi.getY() > 0) {
-						aspi.setY(aspi.getY()-1);
-						break;	
-					}else {
-						System.err.println("Attention: Sortie du cadre !");
-						return aspi;
-					}
-						
-				case 5: //Sud-Ouest
-					if (aspi.getX() > 0 && aspi.getY() > 0) {
-						aspi.setX(aspi.getX()-1);
-						aspi.setY(aspi.getY()-1);
-						break;
-					}else {
-						System.err.println("Attention: Sortie du cadre !");
-						return aspi;
-					}
-				case 6: // Ouest
-					if (aspi.getX() > 0) {
-						aspi.setX(aspi.getX()-1);
-						break;
-					}else {
-						System.err.println("Attention: Sortie du cadre !");
-						return aspi;
-					}
-				case 7: //Nord-Ouest
-					if (aspi.getX() > 0 && aspi.getY() < grille.getY()) {
-						aspi.setX(aspi.getX()-1);
-						aspi.setY(aspi.getY()+1);
-						break;
-					}else {
-						System.err.println("Attention: Sortie du cadre !");
-						return aspi;
-					}
-				default:
-					break;
-				}			
+				avancer(grille, aspi);
 				break;
 				
 			case G:
@@ -183,6 +101,52 @@ public class Controleur {
 		}
 		return aspi;
 	}
+	
+public Aspirateur avancer (Grille grille, Aspirateur aspi) {
+		
+		MoveCheck mv = new MoveCheck();
+		
+		if (mv.isMoveable(grille, aspi)){ //si la position actuelle permet d'avancer dans le sens indiqué
+			
+			switch (aspi.getNumDirection()) {
+				case 0: //Nord
+					aspi.setY(aspi.getY()+1);
+					break;
+				case 1: //Nord-Est
+					aspi.setX(aspi.getX()+1);
+					aspi.setY(aspi.getY()+1);
+						break;
+				case 2: //Est
+					aspi.setX(aspi.getX()+1);
+					break;
+				case 3: //Sud-Est
+					aspi.setX(aspi.getX()+1);
+					aspi.setY(aspi.getY()-1);
+					break;
+					
+				case 4: //Sud
+					aspi.setY(aspi.getY()-1);
+					break;
+						
+				case 5: //Sud-Ouest
+					aspi.setX(aspi.getX()-1);
+					aspi.setY(aspi.getY()-1);
+					break;
+				case 6: // Ouest
+					aspi.setX(aspi.getX()-1);
+					break;
+				case 7: //Nord-Ouest
+					aspi.setX(aspi.getX()-1);
+					aspi.setY(aspi.getY()+1);
+					break;
+				default:
+					break;
+				}		
+		}
+		
+	return null;
+	}
+
 	
 	@Override
 	public String toString() {
