@@ -1,5 +1,5 @@
 # Description du projet
-J'ai utilisé Maven pour la gestion du projet, cela facilitera son évolution.
+Automatisation d'un robot aspirateur.
 
 Pour executer le code vous pouvez soit l'importer dans un IDE (Eclipse, IntelliJ...)
 
